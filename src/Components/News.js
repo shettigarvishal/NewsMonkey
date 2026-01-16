@@ -13,9 +13,7 @@ const News =(props)=> {
   };
 
     //console.log("I'm a constuctor from news component");
-    document.title = `${capitalizeFirstletter(
-      props.category
-    )} |News Monkey`;
+    
   
   const  updateNews=async ()=> {
     props.setProgress(10);
@@ -33,6 +31,9 @@ const News =(props)=> {
   }
   useEffect(() => {
     updateNews();
+    document.title = `${capitalizeFirstletter(
+      props.category
+    )} |News Monkey`;
     
   }, [])
 
@@ -46,7 +47,7 @@ const News =(props)=> {
   };
   const fetchMoreData = async() => {
     setPage(page+1);
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apikey}&page=${page}&pageSize=${props.pagesize}`; //page and pagesize set here to browse
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apikey}&page=${page+1}&pageSize=${props.pagesize}`; //page and pagesize set here to browse
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
@@ -57,7 +58,7 @@ const News =(props)=> {
   };
     return (
       <>
-        <h1 className="text-center" style={{ margin: "40px,0px" }}>
+        <h1 className="text-center" style={{ margin: "35px,0px", marginTop:'90px' }}>
           NewsMonkey - Top {capitalizeFirstletter(props.category)}{" "}
           HeadLines
         </h1>
